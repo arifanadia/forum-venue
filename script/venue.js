@@ -97,17 +97,45 @@ const handleSearch = () => {
     loadForumPosts(searchText);
 
 };
-
-const loadLatestPost = async() => {
+// Latest posts
+const loadLatestPost = async () => {
     const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts');
     const data = await res.json();
     const latestPosts = data;
     displayLatestPost(latestPosts);
-    
+
 }
 const displayLatestPost = (latestPosts) => {
-    latestPosts.forEach((latestPost) =>{
+
+    const latestPostContainer = document.getElementById('latest-post-container');
+    latestPosts.forEach((latestPost) => {
         // console.log(latestPost);
+        const latestPostCard = document.createElement('div');
+        latestPostCard.classList = ` bg-white border border-[#12132D26] rounded-2xl p-4`
+        latestPostCard.innerHTML = `
+        <img class="rounded-lg" src="${latestPost.cover_image}">
+        <div class="flex gap-4 my-3">
+            <img src="icons/icon-11.png" alt="">
+            <p class="text-gray-400">${latestPost?.author?.posted_date || 'No Publish Date'}</p>
+        </div>
+        <h2 class="lg:text-lg font-bold text-mainColor mb-2">${latestPost.title}
+        </h2>
+        <p class="text-gray-400">${latestPost.description
+        }
+        </p>
+        <div class="flex gap-4 mt-4">
+            <img class="w-[64px] h-[64px] rounded-full" src="${latestPost.profile_image}">
+            <div>
+                <h2 class="lg:text-lg font-bold text-mainColor mb-2">${latestPost.author.name}
+                </h2>
+                <p class="text-gray-400">${latestPost?.designation || "Unknown"}</p>
+            </div>
+        </div>
+        
+        
+        `;
+        latestPostContainer.appendChild(latestPostCard);
+
 
     })
 }
