@@ -7,6 +7,7 @@ const loadForumPosts = async (searchText = 'comedy') => {
 }
 
 const displayForumPosts = (posts) => {
+setTimeout(() => {
     const postContainer = document.getElementById('forum-post-container');
     postContainer.textContent = "";
     posts.forEach((post) => {
@@ -15,11 +16,10 @@ const displayForumPosts = (posts) => {
         postCard.classList = `bg-[#F3F3F5] lg:flex gap-2 rounded-2xl p-10 hover:bg-[#797DFC33] hover:border-2 hover:border-[#797DFC1A]`;
         postCard.innerHTML = `
         <div class="relative">
-           <div class="absolute w-4 h-4 rounded-full ${post.isActive ? "bg-green-500": "bg-red-500"} -right-1 -top-1  ">
+           <div class="absolute w-4 h-4 rounded-full ${post.isActive ? "bg-green-500": "bg-red-500"} left-14 lg:-right-1 -top-1 ">
         
           </div>
           <img class="w-[64px] h-[64px] rounded-xl " src="${post.image}" alt="">
-
         </div>
         <div>
             <div class="flex gap-5 mb-1">
@@ -33,13 +33,11 @@ const displayForumPosts = (posts) => {
             <p>${post.description
             }</p>
             <hr class=" border-2 border-spacing-2 border-gray-400 border-dashed my-4">
-            <div class=" flex justify-between">
+            <div class="flex justify-between">
                 <div class="flex gap-4">
                     <div class="flex items-center gap-2">
                         <img src="icons/icon-7.png" alt="">
-                        <p>${post.
-                comment_count
-            }</p>
+                        <p>${post.comment_count}</p>
                     </div>
                     <div class="flex items-center gap-2">
                         <img src="icons/icon-8.png" alt="">
@@ -70,6 +68,7 @@ const displayForumPosts = (posts) => {
             })
         }
     });
+}, 2000);
 
 
 }
@@ -100,7 +99,6 @@ const displayMarkAsRead = (title, viewCount) => {
     console.log(readCount);
     const reads = readCount + 1;
     document.getElementById('read-count').innerText = reads;
-     
 
 }
 
@@ -122,9 +120,8 @@ const toggleLoadingSpinner = (isLoading) =>{
         loadingSpinner.classList.remove('hidden')
     }
     else{
-        setTimeout(() => {
-            loadingSpinner.classList.add('hidden')
-        }, 2000);
+        loadingSpinner.classList.add('hidden')
+       
     }
     
 }
