@@ -122,7 +122,9 @@ const toggleLoadingSpinner = (isLoading) =>{
         loadingSpinner.classList.remove('hidden')
     }
     else{
-        loadingSpinner.classList.add('hidden')
+        setTimeout(() => {
+            loadingSpinner.classList.add('hidden')
+        }, 2000);
     }
     
 }
@@ -169,6 +171,14 @@ const displayLatestPost = (latestPosts) => {
 
 
     })
+}
+
+// converting value
+const getConvertedValue = (elementTd) => {
+    const element = document.getElementById(elementTd).innerText;
+    const convertValue = parseInt(element);
+    // console.log(convertValue);
+    return convertValue;
 }
 
 
