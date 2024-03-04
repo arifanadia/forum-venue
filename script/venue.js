@@ -60,11 +60,14 @@ const displayForumPosts = (posts) => {
         `;
         postContainer.appendChild(postCard);
 
-
+        // hide loading spinner
+        toggleLoadingSpinner(false);
     });
 
 
 }
+
+// display read
 const displayMarkAsRead = (title, viewCount) => {
 
     // mark-as-read box
@@ -95,11 +98,27 @@ const displayMarkAsRead = (title, viewCount) => {
 
 // handle search
 const handleSearch = () => {
+    // show loading spinner
+    toggleLoadingSpinner(true);
+    // search
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
     loadForumPosts(searchText);
-
+   
 };
+
+// loader or spinner
+const toggleLoadingSpinner = (isLoading) =>{
+    const loadingSpinner = document.getElementById('loading-spinner');
+    if(isLoading){
+        loadingSpinner.classList.remove('hidden')
+    }
+    else{
+        loadingSpinner.classList.add('hidden')
+    }
+    
+}
+
 // Latest posts
 const loadLatestPost = async () => {
     const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts');
