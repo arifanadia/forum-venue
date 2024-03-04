@@ -62,6 +62,13 @@ const displayForumPosts = (posts) => {
 
         // hide loading spinner
         toggleLoadingSpinner(false);
+        //post button color
+        const postBtn = document.getElementsByClassName('btn-forum-post');
+        for (const btn of postBtn){
+            btn.addEventListener('click',function (e){
+               btn.style.backgroundColor = '#10B981'
+            })
+        }
     });
 
 
@@ -69,10 +76,10 @@ const displayForumPosts = (posts) => {
 
 // display read
 const displayMarkAsRead = (title, viewCount) => {
+  
 
-    // mark-as-read box
-   
-
+ 
+    // mark-as-read card
     const markAsReadDiv = document.getElementById('mark-as-read');
 
     const markAsReadCard = document.createElement('div');
@@ -93,6 +100,7 @@ const displayMarkAsRead = (title, viewCount) => {
     console.log(readCount);
     const reads = readCount + 1;
     document.getElementById('read-count').innerText = reads;
+     
 
 }
 
