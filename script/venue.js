@@ -14,7 +14,13 @@ const displayForumPosts = (posts) => {
         const postCard = document.createElement('div');
         postCard.classList = `bg-[#F3F3F5] lg:flex gap-2 rounded-2xl p-10 hover:bg-[#797DFC33] hover:border-2 hover:border-[#797DFC1A]`;
         postCard.innerHTML = `
-        <img class="w-[64px] h-[64px] rounded-xl " src="${post.image}" alt="">
+        <div class="relative">
+           <div class="absolute w-4 h-4 rounded-full ${post.isActive ? "bg-green-500": "bg-red-500"} -right-1 -top-1  ">
+        
+          </div>
+          <img class="w-[64px] h-[64px] rounded-xl " src="${post.image}" alt="">
+
+        </div>
         <div>
             <div class="flex gap-5 mb-1">
                 <p># ${post.category
@@ -46,7 +52,7 @@ const displayForumPosts = (posts) => {
                     </div>
                 </div>
 
-                <button onclick="postBtn('${post.title}',${post.view_count})" class="btn btn-forum-post rounded-full"><img class="w-[24px]" src="icons/email.png" alt=""></button>
+                <button onclick="displayMarkAsRead('${post.title}',${post.view_count})" class="btn btn-forum-post rounded-full"><img class="w-[24px]" src="icons/email.png" alt=""></button>
                 
             </div>
         </div>
@@ -59,11 +65,10 @@ const displayForumPosts = (posts) => {
 
 
 }
-const postBtn = (title, viewCount) => {
-
-
+const displayMarkAsRead = (title, viewCount) => {
 
     // mark-as-read box
+   
 
     const markAsReadDiv = document.getElementById('mark-as-read');
 
@@ -88,12 +93,10 @@ const postBtn = (title, viewCount) => {
 
 }
 
-
+// handle search
 const handleSearch = () => {
-    // console.log('search');
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
-    // console.log(searchText);
     loadForumPosts(searchText);
 
 };
@@ -111,6 +114,7 @@ const displayLatestPost = (latestPosts) => {
     latestPosts.forEach((latestPost) => {
         // console.log(latestPost);
         const latestPostCard = document.createElement('div');
+
         latestPostCard.classList = ` bg-white border border-[#12132D26] rounded-2xl p-4`
         latestPostCard.innerHTML = `
         <img class="rounded-lg" src="${latestPost.cover_image}">
